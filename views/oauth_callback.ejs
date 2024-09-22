@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authentication Successful</title>
+</head>
+<body>
+  <script>
+    // Notify the main window
+    if (window.opener) {
+      window.opener.postMessage({result:'authSuccess', originalUrl: '<%= originalUrl %>'}, window.location.origin);
+      window.close();
+    } else {
+      // Fallback if window.opener is not available
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>

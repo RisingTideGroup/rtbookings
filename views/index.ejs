@@ -1,0 +1,58 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: <%= brandColor %>;
+      color: <%= textColor %>;
+      text-align: center;
+      padding: 50px;
+    }
+    .logo {
+      max-width: 200px;
+      margin-bottom: 30px;
+    }
+    .button {
+      display: inline-block;
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 18px;
+      color: <%= buttonTextColor %>;
+      background-color: <%= buttonBgColor %>;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .button:hover {
+      background-color: <%= buttonHoverBgColor %>;
+      color: <%= buttonHoverTextColor %>;
+    }
+  </style>
+  <script>
+  window.addEventListener('message', function(event) {
+    // Verify the origin of the message for security
+    if (event.origin !== window.location.origin) {
+      return;
+    }
+
+    if (event.data.result === 'authSuccess') {
+      // Refresh the page or redirect to the booking page
+      window.location.href = event.data.originalUrl;
+    }
+  }, false);
+
+  function openAuthWindow() {
+      const authWindow = window.open('/auth', 'AuthWindow', 'width=600,height=800');
+  }
+  </script>
+</head>
+<body>
+  <img src="<%= logoUrl %>" alt="Logo" class="logo">
+  <h1>Welcome to Our Booking Page</h1>
+  <a href="#" class="button" onclick="openAuthWindow()">Existing Customer</a>
+  <a href="/new-customer" class="button">New Customer</a>
+</body>
+</html>

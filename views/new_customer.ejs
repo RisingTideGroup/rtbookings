@@ -1,0 +1,43 @@
+<!-- views/new_customer.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>New Customer</title>
+  <style>
+    :root {
+      --brand-color: <%= brandColor %>;
+      --text-color: <%= textColor %>;
+      --button-bg-color: <%= buttonBgColor %>;
+      --button-text-color: <%= buttonTextColor %>;
+      --button-hover-bg-color: <%= buttonHoverBgColor %>;
+      --button-hover-text-color: <%= buttonHoverTextColor %>;
+    }
+  </style>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <%- include('partials/header', { brandColor, logoUrl, textColor }) %>
+
+  <!-- Page Content -->
+  <div style="padding: 20px;">
+    <h1>New Customer Ticket Submission</h1>
+    <p>Please fill out the form below to create a new support ticket. <strong>Note down the Ticket ID upon submission, as you'll need it to book an appointment.</strong></p>
+
+    <!-- HaloPSA Form -->
+    <div id="halo-form"></div>
+
+    <script>
+      var haloFormConfig = {
+        haloApiUrl: "<%= haloApiUrl %>",
+        ticketTypeId: <%= ticketTypeId %>,
+        ticketTypeKey: "<%= ticketTypeKey %>",
+      }
+    </script>
+    <script src="<%= haloEmbedJsUrl %>"></script>
+    <link rel="stylesheet" href="<%= haloEmbedCssUrl %>"></link>
+  </div>
+
+  <%- include('partials/footer', { brandColor, textColor }) %>
+</body>
+</html>

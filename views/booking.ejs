@@ -1,0 +1,37 @@
+<!-- views/booking.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Booking Page</title>
+  <style>
+    :root {
+      --brand-color: <%= brandColor %>;
+      --text-color: <%= textColor %>;
+      --button-bg-color: <%= buttonBgColor %>;
+      --button-text-color: <%= buttonTextColor %>;
+      --button-hover-bg-color: <%= buttonHoverBgColor %>;
+      --button-hover-text-color: <%= buttonHoverTextColor %>;
+    }
+  </style>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Include header -->
+  <%- include('partials/header', { brandColor, logoUrl, textColor }) %>
+
+  <!-- Page Content -->
+  <div style="padding: 20px;">
+    <h1>Welcome, <%= user.name %></h1>
+    <h3></strong><%= user.client_name %> / <%= user.site_name %></h3>
+
+  <!-- Calendly inline widget begin -->
+  <!-- a2=$FaultID -->
+  <div class="calendly-inline-widget" data-url="https://calendly.com/<%= username %>/<%= event %>?name=<%= user.name %>&a1=<%= user.client_name %>&email=<%= user.emailaddress %>&hide_gdpr_banner=1&background_color=<%= brandColor.replace('#','') %>&text_color=<%= textColor.replace('#','') %>&primary_color=<%= buttonBgColor.replace('#','') %>" style="min-width:320px;height:700px;"></div>
+  <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <!-- Calendly inline widget end -->
+  </div>
+  <!-- Include footer -->
+  <%- include('partials/footer', { brandColor, textColor }) %>
+</body>
+</html>

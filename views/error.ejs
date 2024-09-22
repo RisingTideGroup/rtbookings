@@ -1,0 +1,28 @@
+<!-- views/error.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Error</title>
+  <style>
+    :root {
+      --brand-color: <%= brandColor %>;
+      --text-color: <%= textColor %>;
+    }
+  </style>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Include header -->
+  <%- include('partials/header', { brandColor, logoUrl, textColor }) %>
+
+  <!-- Error Message -->
+  <div style="padding: 20px;">
+    <h1>Error</h1>
+    <p><%= message %></p>
+  </div>
+
+  <!-- Include footer -->
+  <%- include('partials/footer', { brandColor, textColor }) %>
+</body>
+</html>
