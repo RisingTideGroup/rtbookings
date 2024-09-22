@@ -50,9 +50,15 @@
   </script>
 </head>
 <body>
-  <img src="<%= logoUrl %>" alt="Logo" class="logo">
+  <!-- Include header -->
+  <%- include('partials/header', { brandColor, logoUrl, textColor }) %>
+
   <h1>Welcome to Our Booking Page</h1>
   <a href="#" class="button" onclick="openAuthWindow()">Existing Customer</a>
   <a href="/new-customer" class="button">New Customer</a>
+
+<!-- Include footer -->
+  <%- include('partials/footer', { brandColor, textColor, Org }) %>
+
 </body>
 </html>
