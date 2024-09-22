@@ -22,7 +22,7 @@ function handleField(field) {
 }
 
 function renderForm(fields) {
-  const formContainer = document.getElementById('dynamicForm');
+  const formContainer = document.getElementById('formContainer');
   formContainer.innerHTML = ''; // Clear existing form
 
   fields.forEach(field => {
@@ -88,7 +88,7 @@ function createTextInput(field) {
 }
 
 // Add event listeners to handle visibility conditions based on selection
-document.getElementById('dynamicForm').addEventListener('change', (event) => {
+document.getElementById('formContainer').addEventListener('change', (event) => {
   const target = event.target;
   formFields.forEach(field => {
     if (field.visibility_conditions) {
