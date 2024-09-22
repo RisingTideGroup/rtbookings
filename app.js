@@ -157,7 +157,7 @@ app.get('/oauth/callback', async (req, res) => {
         req.session.org = userData.organisation // Use the Halo branding details for branding
         
         // Log returned User Data from Halo API. Uncomment for debugging.
-        //console.log('User data:', userData);
+        console.log('User data:', userData.organisation);
       } catch (apiError) {
         console.error(
           'Error fetching user details:',
@@ -208,7 +208,7 @@ async function isAuthenticated(req, res, next) {
         req.session.org = userData.organisation; // Use branding from HaloPSA if available
         
         // Log returned User Data from Halo API. Uncomment for debugging.
-        //console.log('User data:', userData);
+        console.log('User data:', userData.organisation);
       } catch (apiError) {
         console.error(
           'Error fetching user details:',
