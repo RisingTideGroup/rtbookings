@@ -33,11 +33,11 @@ function handleField(field) {
   
   if (field.fieldinfo) {
     if (field.fieldinfo.type === 2 && field.fieldinfo.inputtype === 0) {
-      createDropdown(field);
+      createDropdown(field, fieldState);
     } else if (field.fieldinfo.type === 2 && field.fieldinfo.inputtype === 1) {
-      createRadioButtons(field);
+      createRadioButtons(field, fieldState);
     } else if (field.fieldinfo.type === 0) {
-      createTextInput(field);
+      createTextInput(field, fieldState);
     }
   }
 }
