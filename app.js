@@ -151,7 +151,8 @@ app.get('/oauth/callback', async (req, res) => {
         const userData = userResponse.data;
   
         // Store user details in session
-        req.session.user = userData.user; // Adjust based on actual API response
+        req.session.user = userData.user; // Collect User data of the signed in user
+        req.session.org = userData.organisation // Use the Halo branding details for branding
         
         // Log returned User Data from Halo API. Uncomment for debugging.
         //console.log('User data:', userData);
@@ -193,6 +194,30 @@ function isAuthenticated(req, res, next) {
   if (accessToken) {
     next();
   } else {
+      // **Make unauthenticated GET request to HaloPSA API to get user details**
+      try {
+        const userResponse = await axios.get(`${HALOPSA_BASE_URL}/api/ClientCache`);
+  
+        // Extract user details from response
+        const userData = userResponse.data;
+  
+        // Store user details in session
+        req.session.org = userData.organisation; // Use branding from HaloPSA if available
+        
+        // Log returned User Data from Halo API. Uncomment for debugging.
+        //console.log('User data:', userData);
+      } catch (apiError) {
+        console.error(
+          'Error fetching user details:',
+          apiError.response ? apiError.response.data : apiError.message
+        );
+        return res.status(500).render('error',{
+          message: "Failed to fetch org details. Please validate HaloPSA CORS is setup properly Details",
+          brandColor: BRAND_COLOR,
+          textColor: TEXT_COLOR,
+          logoUrl: LOGO_URL
+          });
+      }
     // Store the original URL in the session
     req.session.originalUrl = req.originalUrl;
     res.redirect('/login');
