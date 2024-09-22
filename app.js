@@ -49,7 +49,7 @@ app.use(session({
 // Intercept page route (now at /login)
 app.get('/login', (req, res) => {
 if (!req.session.org) {
-    res.redirect('/');
+    return res.redirect('/');
   }
   
   // Retrieve any query parameters
@@ -233,7 +233,7 @@ async function isAuthenticated(req, res, next) {
 
 app.get('/new-customer', (req, res) => {
   if (!req.session.org) {
-    res.redirect('/'); // Default to home page if no org
+    return res.redirect('/'); // Default to home page if no org
   }  
   const Org = req.session.org;
   
