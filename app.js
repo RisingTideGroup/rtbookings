@@ -50,7 +50,8 @@ app.use(session({
 app.get('/login', (req, res) => {
   // Retrieve any query parameters
   const { username, event } = req.query;
-
+  const Org = req.session.org
+  
   // Store them in the session for later use
   if (username && event) {
     req.session.username = username;
@@ -65,6 +66,7 @@ app.get('/login', (req, res) => {
     buttonTextColor: BUTTON_TEXT_COLOR,
     buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
     buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,
+    Org
   });
 });
 
@@ -225,6 +227,8 @@ function isAuthenticated(req, res, next) {
 }
 
 app.get('/new-customer', (req, res) => {
+    const Org = req.session.org;
+  
     res.render('new_customer', {
       brandColor: BRAND_COLOR,
       textColor: TEXT_COLOR,
@@ -236,6 +240,7 @@ app.get('/new-customer', (req, res) => {
       haloApiUrl: HALOPSA_API_URL,
       haloEmbedCssUrl: HALOPSA_EMBED_CSS_URL,
       haloEmbedJsUrl: HALOPSA_EMBED_JS_URL,
+      Org,
       ticketTypeId: process.env.HALOPSA_TICKET_TYPE_ID,
       ticketTypeKey: process.env.HALOPSA_TICKET_TYPE_KEY
     });
@@ -276,7 +281,8 @@ app.get('/:username/:event', isAuthenticated, async (req, res) => {
       // Valid Calendly link
       req.session.username = username;
       req.session.event = event;
-      const user = req.session.user
+      const user = req.session.user;
+      const Org = req.session.org;
 
       // Redirect to the booking page
       res.render('booking', {
@@ -289,7 +295,8 @@ app.get('/:username/:event', isAuthenticated, async (req, res) => {
         buttonTextColor: BUTTON_TEXT_COLOR,
         buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
         buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,
-        user
+        user,
+        Org
       });
     }
     else {
@@ -315,6 +322,8 @@ app.get('/:username/:event', isAuthenticated, async (req, res) => {
 
 // Home page (booking page) route
 app.get('/', (req, res) => {
+  const Org = req.session.org;
+  
   res.render('home', {
     brandColor: BRAND_COLOR,
     textColor: TEXT_COLOR,
@@ -323,6 +332,7 @@ app.get('/', (req, res) => {
     buttonTextColor: BUTTON_TEXT_COLOR,
     buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
     buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,
+    Org
   });
 });
 
