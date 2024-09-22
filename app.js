@@ -49,7 +49,7 @@ app.use(session({
 // Intercept page route (now at /login)
 app.get('/login', (req, res) => {
 if (!req.session.org) {
-    req.redirect('/');
+    res.redirect('/');
   }
   
   // Retrieve any query parameters
