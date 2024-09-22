@@ -108,7 +108,7 @@ function createTextInput(field) {
     }
   }
 
-  document.getElementById('form-container').appendChild(container);
+  formContainer.appendChild(container);
 }
 
 // Add event listeners to handle visibility conditions based on selection
