@@ -190,7 +190,7 @@ app.get('/oauth/callback', async (req, res) => {
 
 
 // Middleware to check authentication
-function isAuthenticated(req, res, next) {
+async function isAuthenticated(req, res, next) {
   console.log('isAuthenticated middleware called on:', req.path);
   const accessToken = req.session.accessToken;
   if (accessToken) {
