@@ -10,6 +10,7 @@ fetch(apiUrl)
   });
 
 function handleField(field) {
+  console.log(`Doing Field ${field.fieldinfo.label} of ID ${field.fieldinfo.id}`);
   if (field.fieldinfo) {
     if (field.fieldinfo.type === 2 && field.fieldinfo.inputtype === 0) {
       createDropdown(field);
