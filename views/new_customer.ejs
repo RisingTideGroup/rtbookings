@@ -25,18 +25,13 @@
     <p>Please fill out the form below to create a new support ticket. <strong>Note down the Ticket ID upon submission, as you'll need it to book an appointment.</strong></p>
 
     <!-- HaloPSA Form -->
-    <div id="halo-form"></div>
-
+    <div id="formContainer"></div>
     <script>
-      var haloFormConfig = {
-        haloApiUrl: "<%= haloApiUrl %>",
-        ticketTypeId: <%= ticketTypeId %>,
-        ticketTypeKey: "<%= ticketTypeKey %>",
-      }
+        const baseUrl = "<%= haloApiUrl %>";
+        const ticketTypeId = "<%= ticketTypeId %>";
+        const publishedId = "<%= ticketTypeKey %>";
     </script>
-    <script src="<%= haloEmbedJsUrl %>"></script>
-    <link rel="stylesheet" href="<%= haloEmbedCssUrl %>"></link>
-  </div>
+    <script src="/js/dynamicForm.js"></script> 
 
   <%- include('partials/footer', { brandColor, textColor, Org }) %>
 </body>
