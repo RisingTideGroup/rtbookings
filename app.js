@@ -48,6 +48,10 @@ app.use(session({
 
 // Intercept page route (now at /login)
 app.get('/login', (req, res) => {
+if (!req.session.org) {
+    req.redirect('/');
+  }
+  
   // Retrieve any query parameters
   const { username, event } = req.query;
   const Org = req.session.org
@@ -228,7 +232,10 @@ async function isAuthenticated(req, res, next) {
 }
 
 app.get('/new-customer', (req, res) => {
-    const Org = req.session.org;
+  if (!req.session.org) {
+    res.redirect('/'); // Default to home page if no org
+  }  
+  const Org = req.session.org;
   
     res.render('new_customer', {
       brandColor: BRAND_COLOR,
