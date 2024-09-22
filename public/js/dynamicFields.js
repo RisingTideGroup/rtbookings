@@ -11,6 +11,26 @@ fetch(apiUrl)
 
 function handleField(field) {
   console.log(`Doing Field ${field.fieldinfo.label} of ID ${field.fieldinfo.id}`);
+
+  // Determine field state based on 'endusernew', which is the only thing relevant as this is replacing new ticket forms from the portal
+  let fieldState;
+  switch (field.endusernew) {
+    case 0:
+      fieldState = 'hidden';
+      break;
+    case 1:
+      fieldState = 'editable';
+      break;
+    case 2:
+      fieldState = 'required';
+      break;
+    case 3:
+      fieldState = 'readonly';
+      break;
+    default:
+      fieldState = 'editable'; // Default state if undefined
+  }
+  
   if (field.fieldinfo) {
     if (field.fieldinfo.type === 2 && field.fieldinfo.inputtype === 0) {
       createDropdown(field);
@@ -43,7 +63,11 @@ function renderForm(fields) {
 }
 
 
-function createDropdown(field) {
+function createDropdown(field, state) {
+  if (state === 'hidden') {
+    return; // Do not render anything if field is hidden
+  }
+
   const label = document.createElement('label');
   label.textContent = field.override_fieldname || field.fieldinfo.label;
   formContainer.appendChild(label);
@@ -58,7 +82,11 @@ function createDropdown(field) {
   formContainer.appendChild(select);
 }
 
-function createRadioButtons(field) {
+function createRadioButtons(field, state) {
+  if (state === 'hidden') {
+    return; // Do not render anything if field is hidden
+  }
+
   const fieldSet = document.createElement('fieldset');
   const legend = document.createElement('legend');
   legend.textContent = field.override_fieldname || field.fieldinfo.label;
@@ -77,19 +105,24 @@ function createRadioButtons(field) {
   formContainer.appendChild(fieldSet);
 }
 
-function createTextInput(field) {
+function createTextInput(field, state) {
+  if (state === 'hidden') {
+    return; // Do not render anything if field is hidden
+  }
+
   const container = document.createElement('div');
   container.className = 'form-group';
   
   // Check if the field is read-only
-  if (field.fieldinfo.readonly) {
-    if (field.fieldinfo.hint) {
+  if (state === 'readonly') {
       // If read-only, hide the input field but display the hint
+    if (field.fieldinfo.hint) {
       const hint = document.createElement('div');
-      hint.innerHTML = field.fieldinfo.hint;  // Render HTML or plain text
+      hint.innerHTML = field.fieldinfo.hint;
       container.appendChild(hint);
     }
-  } else {
+  } 
+  else {
     const label = document.createElement('label');
     label.textContent = field.fieldinfo.label;
     container.appendChild(label);
@@ -98,6 +131,8 @@ function createTextInput(field) {
     input.type = 'text';
     input.className = 'form-control';
     input.id = `field-${field.fieldinfo.id}`;
+    input.readOnly = (state === 'readonly');
+    input.required = (state === 'required');
     container.appendChild(input);
 
     // Check for hint and add it below the input field
