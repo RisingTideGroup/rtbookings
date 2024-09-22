@@ -9,23 +9,38 @@ fetch(apiUrl)
     renderForm(formFields);
   });
 
+function handleField(field) {
+  if (field.fieldinfo) {
+    if (field.fieldinfo.type === 2 && field.fieldinfo.inputtype === 0) {
+      createDropdown(field);
+    } else if (field.fieldinfo.type === 2 && field.fieldinfo.inputtype === 1) {
+      createRadioButtons(field);
+    } else if (field.fieldinfo.type === 0) {
+      createTextInput(field);
+    }
+  }
+}
+
 function renderForm(fields) {
-  const formContainer = document.getElementById('formContainer');
+  const formContainer = document.getElementById('dynamicForm');
   formContainer.innerHTML = ''; // Clear existing form
 
   fields.forEach(field => {
-    if (field.fieldinfo.type === 2 && field.fieldinfo.inputtype === 0) {
-      // Dropdown
-      createDropdown(field);
-    } else if (field.fieldinfo.type === 2 && field.fieldinfo.inputtype === 1) {
-      // Radio Buttons
-      createRadioButtons(field);
-    } else if (field.fieldinfo.type === 0) {
-      // Text Input
-      createTextInput(field);
+    if (field.group) {
+      // Create a header for the group and handle grouped fields
+      const groupHeader = document.createElement('h3');
+      groupHeader.textContent = field.group.header;
+      formContainer.appendChild(groupHeader);
+
+      field.group.fields.forEach(subField => {
+        handleField(subField); // Handle each sub-field in the group
+      });
+    } else {
+      handleField(field); // Handle regular fields
     }
   });
 }
+
 
 function createDropdown(field) {
   const label = document.createElement('label');
