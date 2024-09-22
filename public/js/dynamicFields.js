@@ -78,14 +78,37 @@ function createRadioButtons(field) {
 }
 
 function createTextInput(field) {
-  const label = document.createElement('label');
-  label.textContent = field.override_fieldname || field.fieldinfo.label;
-  formContainer.appendChild(label);
+  const container = document.createElement('div');
+  container.className = 'form-group';
+  
+  // Check if the field is read-only
+  if (field.fieldinfo.readonly) {
+    if (field.fieldinfo.hint) {
+      // If read-only, hide the input field but display the hint
+      const hint = document.createElement('div');
+      hint.innerHTML = field.fieldinfo.hint;  // Render HTML or plain text
+      container.appendChild(hint);
+    }
+  } else {
+    const label = document.createElement('label');
+    label.textContent = field.fieldinfo.label;
+    container.appendChild(label);
 
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.placeholder = field.fieldinfo.hint;
-  formContainer.appendChild(input);
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'form-control';
+    input.id = `field-${field.fieldinfo.id}`;
+    container.appendChild(input);
+
+    // Check for hint and add it below the input field
+    if (field.fieldinfo.hint) {
+      const hint = document.createElement('div');
+      hint.innerHTML = field.fieldinfo.hint;  // Render HTML or plain text
+      container.appendChild(hint);
+    }
+  }
+
+  document.getElementById('form-container').appendChild(container);
 }
 
 // Add event listeners to handle visibility conditions based on selection
