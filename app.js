@@ -167,7 +167,8 @@ app.get('/oauth/callback', async (req, res) => {
           message: "Failed to fetch user details. Please validate HaloPSA API Details",
           brandColor: BRAND_COLOR,
           textColor: TEXT_COLOR,
-          logoUrl: LOGO_URL
+          logoUrl: LOGO_URL,
+          Org: {}
           });
       }
 
