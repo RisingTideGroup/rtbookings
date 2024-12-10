@@ -172,6 +172,11 @@ app.get('/oauth/callback', async (req, res) => {
           brandColor: BRAND_COLOR,
           textColor: TEXT_COLOR,
           logoUrl: LOGO_URL,
+          buttonBgColor: BUTTON_BG_COLOR,
+          buttonTextColor: BUTTON_TEXT_COLOR,
+          buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
+          buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,
+          user,
           Org: {}
           });
       }
@@ -188,6 +193,10 @@ app.get('/oauth/callback', async (req, res) => {
       brandColor: BRAND_COLOR,
       textColor: TEXT_COLOR,
       logoUrl: LOGO_URL,
+      buttonBgColor: BUTTON_BG_COLOR,
+      buttonTextColor: BUTTON_TEXT_COLOR,
+      buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
+      buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,      
     });
   }
 
@@ -222,7 +231,11 @@ async function isAuthenticated(req, res, next) {
           message: "Failed to fetch org details. Please validate HaloPSA CORS is setup properly Details",
           brandColor: BRAND_COLOR,
           textColor: TEXT_COLOR,
-          logoUrl: LOGO_URL
+          logoUrl: LOGO_URL,
+          buttonBgColor: BUTTON_BG_COLOR,
+          buttonTextColor: BUTTON_TEXT_COLOR,
+          buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
+          buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,
           });
       }
     // Store the original URL in the session
@@ -313,7 +326,13 @@ app.get('/:username/:event', isAuthenticated, async (req, res) => {
         message: 'Invalid booking link. Please check the URL.',
         brandColor: BRAND_COLOR,
         textColor: TEXT_COLOR,
-        logoUrl: LOGO_URL
+        logoUrl: LOGO_URL,
+        buttonBgColor: BUTTON_BG_COLOR,
+        buttonTextColor: BUTTON_TEXT_COLOR,
+        buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
+        buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,
+        user,
+        Org
       })
     }
   } catch (error) {
@@ -321,9 +340,15 @@ app.get('/:username/:event', isAuthenticated, async (req, res) => {
     // Calendly link does not exist or an error occurred
     res.status(500).render('error',{
       message: error,
-      brandColor: BRAND_COLOR,
-      textColor: TEXT_COLOR,
-      logoUrl: LOGO_URL
+        brandColor: BRAND_COLOR,
+        textColor: TEXT_COLOR,
+        logoUrl: LOGO_URL,
+        buttonBgColor: BUTTON_BG_COLOR,
+        buttonTextColor: BUTTON_TEXT_COLOR,
+        buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
+        buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,
+        user,
+        Org
     })
   }
 });
