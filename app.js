@@ -346,7 +346,6 @@ app.get('/:username/:event', isAuthenticated, async (req, res) => {
         buttonTextColor: BUTTON_TEXT_COLOR,
         buttonHoverBgColor: BUTTON_HOVER_BG_COLOR,
         buttonHoverTextColor: BUTTON_HOVER_TEXT_COLOR,
-        user,
         Org
     })
   }
