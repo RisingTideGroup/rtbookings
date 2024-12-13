@@ -1,28 +1,144 @@
+/* General Page Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: var(--text-color);
-  }
-  
-  header, footer {
-    color: var(--text-color);
-  }
-  
-  .nav-button {
-    display: inline-block;
-    margin: 0 5px;
-    padding: 8px 12px;
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    text-decoration: none;
-    border-radius: 4px;
-  }
-  
-  .nav-button:hover {
-    background-color: var(--button-hover-bg-color);
-    color: var(--button-hover-text-color);
-  }
-  
-  /* Additional common styles can be added here */
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  background-color: #f7f7f7;
+}
+
+/* Header and Footer */
+header, footer {
+  color: var(--text-color);
+  padding: 10px 20px;
+  background-color: var(--brand-color);
+}
+
+/* Navigation Buttons */
+.nav-button {
+  display: inline-block;
+  margin: 0 5px;
+  padding: 8px 12px;
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.nav-button:hover {
+  background-color: var(--button-hover-bg-color);
+  color: var(--button-hover-text-color);
+}
+
+/* Form Container */
+#formContainer {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  color: var(--text-color);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--brand-color);
+  box-shadow: 0 0 4px var(--brand-color);
+}
+
+/* Dropdowns */
+select.form-control {
+  appearance: none;
+  background: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"%3E%3Cpath fill="%23000" d="M2 0L0 2h4zM2 5L0 3h4z"/%3E%3C/svg%3E')
+    no-repeat right 10px center;
+  background-color: #fff;
+  background-size: 12px;
+}
+
+/* Radio Buttons */
+form fieldset {
+  border: none;
+  margin: 15px 0;
+  padding: 0;
+}
+
+form fieldset legend {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+form fieldset label {
+  display: inline-block;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+form fieldset input[type="radio"] {
+  margin-right: 5px;
+}
+
+/* Validation States */
+input.error,
+select.error {
+  border-color: red;
+  background-color: #ffe6e6;
+}
+
+input.success,
+select.success {
+  border-color: green;
+}
+
+/* Buttons */
+button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg-color);
+  color: var(--button-hover-text-color);
+}
+
+/* Grouped Fields */
+[data-groupid] {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+[data-groupid] h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+  color: var(--brand-color);
+}
